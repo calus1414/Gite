@@ -1,0 +1,27 @@
+{% extends "base.html.twig"%}
+
+{% block title %}les Gites
+{% endblock %}
+
+
+{% block body %}
+	<h1>les gites disponible</h1>
+	<div class="row">
+		{% for gite in gites %}
+
+
+			<div class="card m-4" style="width: 18rem;">
+				<div class="card-body">
+					<h3 class="card-title">{{gite.name}}</h3>
+					<h5 class="card-title">{{gite.createdAt | format_datetime()}}</h5>
+					<p class="card-text">{{gite.description}}</p>
+					<p class="card-text">{{gite.postalCode}}</p>
+
+				</div>
+				<a class='btn btn-primary' href='{{ path("gite_show",{id:gite.id}) }}'>Voir le gite</a>
+
+			</div>
+
+		{% endfor %}
+	</div>
+{%  endblock %}

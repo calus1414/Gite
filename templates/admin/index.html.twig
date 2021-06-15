@@ -1,0 +1,43 @@
+{% extends "base.html.twig" %}
+
+
+{% block titke %}Admin
+{% endblock %}
+
+
+{% block body %}
+
+	<h1>Admin Place</h1>
+
+
+	<div class="row">
+		{% for message in app.flashes('success') %}
+			<div class="alert alert-success">
+				<p>{{message}}</p>
+			</div>
+		{% endfor %}
+		<div class="md-3">
+			<a href="{{ path("admin_new") }}" class="btn btn-warning">Créer</a>
+		</div>
+
+		<table class="table table-striped">
+			<thead>
+				<th># id</th>
+				<th>Nom</th>
+				<th>Action</th>
+
+			</thead>
+			<tbody>
+				{% for gite in gites %}
+					<tr>
+						<td>{{gite.id}}</td>
+						<td>{{gite.name}}</td>
+						<td>
+							<a href="" class='btn btn-primary'>Editer</a>
+						</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
+{% endblock %}

@@ -1,0 +1,47 @@
+{%  extends "base.html.twig" %}
+
+
+{% block title %}
+	le Gite
+{% endblock  %}
+
+{% block body %}
+	<h1>Le Gite :
+	</h1>
+
+
+	<div class="row">
+		<h1 class="card-title">{{gite.name}}</h1>
+		<div class="row">
+			<p class="">{{gite.description}}</p>
+			<div class="col-md-6">
+				<table class="table table-striped">
+					<thead>
+						<tr>
+							<th>Surface</th>
+							<td>{{gite.surface}}</td>
+						</tr>
+						<tr>
+							<th>Chambre</th>
+							<td>{{gite.bedroom}}</td>
+						</tr>
+						<tr>
+							<th>Animaux</th>
+							{% if gite.animals %}
+
+								<td>Accepter</td>
+							{% else %}
+								<td>Refuser</td>
+								{% endif%}
+							</tr>
+						</tr>
+					</thead>
+
+				</table>
+			</div>
+
+
+		</div>
+
+	</div>
+</div>{% endblock  %}
