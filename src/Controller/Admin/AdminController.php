@@ -4,7 +4,7 @@ namespace App\Controller\Admin;
 
 use App\Entity\Gite;
 use App\Form\GiteType;
-
+use App\Form\UpdateGiteType;
 use App\Repository\GiteRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -54,5 +54,45 @@ class AdminController extends AbstractController
         return $this->render("admin/new.html.twig", [
             "formGite" => $form->createView()
         ]);
+    }
+
+    /**
+     * @Route("/admin/{id}", name="admin_change")
+     * 
+     */
+    public function change(Gite $gite, Request $request)
+    {
+        $form = $this->createForm(UpdateGiteType::class, $gite);
+
+        $form->handleRequest($request);
+        // dd($gite);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+
+            $this->em->flush();
+            $this->addFlash('success', "Le Gite a bien été modifer");
+            return $this->redirectToRoute('admin_index');
+        }
+        return $this->render("admin/change.html.twig", [
+            "gite" => $gite,
+            "form" => $form->createView()
+        ]);
+    }
+
+    /**
+     * @Route("/admin/d/{id}", name="admin_delete")
+     * 
+     */
+
+    public function delete(Gite $gite)
+    {
+        // $gite = $this->giteRipository->find($id);
+
+        // dd($gite);
+        $this->em->remove($gite);
+        $this->em->flush();
+        $this->addFlash('success', "Le Gite a bien été suprimer");
+        return $this->redirectToRoute("admin_index");
     }
 }

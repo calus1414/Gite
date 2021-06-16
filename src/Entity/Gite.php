@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\GiteRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=GiteRepository::class)
@@ -19,41 +20,79 @@ class Gite
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(
+     *      message= "le nom du gite ne peut être vide")
+     * @Assert\Length(
+     *      min = 5,
+     *      max = 50,
+     *      minMessage = "le nom du Gite doit comporter un minimum de  {{ limit }} caracteres ",
+     *      maxMessage = "le nom du Gite doit comporter un maximum de   {{ limit }} caracteres"
+     * )
      */
-    private $Name;
+    private $name;
 
     /**
      * @ORM\Column(type="text")
+     *@Assert\NotBlank(
+     *      message= "la description du gite ne peut être vide")
+     *@Assert\Length(
+     *      min = 15,
+     *      max = 250,
+     *      minMessage = "la description  doit comporter un minimum de  {{ limit }} caracteres ",
+     *      maxMessage = "la description du Gite doit comporter un maximum de  {{ limit }} caracteres"
+     * )
+     * 
+     * 
      */
     private $description;
 
     /**
      * @ORM\Column(type="integer")
+     * @Assert\NotBlank(
+     *      message= "la surface du gite ne peut être vide")
+     * 
      */
     private $surface;
 
     /**
      * @ORM\Column(type="integer")
+     * @Assert\NotBlank(
+     *      message= "le nombre de chambre du gite ne peut être vide")
+     * 
      */
     private $bedroom;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(
+     *      message= "l'adresse du gite ne peut être vide")
+     * 
      */
     private $address;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(
+     *      message= "la ville du gite ne peut être vide")
+     * 
      */
     private $city;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(
+     *      message= "le code postal du gite ne peut être vide")
+     * @Assert\Regex(
+     *      pattern="/[0-9]{5}/",
+     *      message="le code postal doit contenir 5 chiffres"
+     * )
      */
     private $postal_code;
 
     /**
      * @ORM\Column(type="boolean", options={"default":false})
+     * 
+     * 
      */
     private $animals;
 
@@ -74,14 +113,14 @@ class Gite
         return $this->id;
     }
 
-    public function getName(): ?string
+    public function getname(): ?string
     {
-        return $this->Name;
+        return $this->name;
     }
 
-    public function setName(string $Name): self
+    public function setname(string $name): self
     {
-        $this->Name = $Name;
+        $this->name = $name;
 
         return $this;
     }
