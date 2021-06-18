@@ -7,6 +7,7 @@ use App\Form\GiteType;
 use App\Form\UpdateGiteType;
 use App\Repository\GiteRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -15,13 +16,14 @@ class AdminController extends AbstractController
 {
 
 
-    private GiteRepository $giteRipository;
+    private GiteRepository $giteRepository;
     private EntityManagerInterface $em;
-
-    public function __construct(GiteRepository $gitRepository, EntityManagerInterface $em)
+    private PaginatorInterface $paginator;
+    public function __construct(GiteRepository $giteRepository, EntityManagerInterface $em, PaginatorInterface $paginator)
     {
-        $this->giteRepository = $gitRepository;
+        $this->giteRepository = $giteRepository;
         $this->em = $em;
+        $this->paginator = $paginator;
     }
 
     /**
@@ -29,9 +31,18 @@ class AdminController extends AbstractController
      * 
      * 
      */
-    public function index()
+    public function index(Request $request)
     {
+
+
         $gites = $this->giteRepository->findAll();
+        $gites = $this->paginator->paginate(
+            $gites,
+            $request->query->getInt("page", 1),
+            20
+
+        );
+
         return $this->render("admin/index.html.twig", ["gites" => $gites]);
     }
 

@@ -1,0 +1,44 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Enregistrement
+{% endblock %}
+
+
+{% block body %}
+	<h1>enregistrement</h1>
+	{% for message in app.flashes('danger') %}
+
+		<div class="alert alert-danger">
+			<p>{{message}}</p>
+		</div>
+
+	{% endfor %}
+	{{ form_start(form) }}
+	<div class="row">
+		<div class="col-md-4">{{ form_row(form.username) }}</div>
+
+	</div>
+	<div class="row ">
+		<div class="col-md-5">{{ form_row(form.password) }}</div>
+
+
+	</div>
+	<div class="row ">
+		<label for="new_user_password">
+			Répété le Mot de Passe</label>
+		<div class="col-md-5"><input type="password" name='password2' class='form-control'>
+		</div>
+
+
+	</div>
+
+
+	<div class="row">
+		<div class="col-md-6">
+
+			<input type='submit' id='new_user_password' class='btn btn-primary' value='Créer'>
+		</div>
+	</div>
+	{{ form_end(form) }}
+
+{% endblock %}

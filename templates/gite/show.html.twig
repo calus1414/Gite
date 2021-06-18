@@ -35,6 +35,16 @@
 								{% endif%}
 							</tr>
 						</tr>
+						<tr>
+							<th>Equipement</th>
+							<td>
+								{% for equipement in gite.equipements %}
+
+									<li>{{equipement.name}}</li>
+
+								{% endfor %}
+							</td>
+						</tr>
 					</thead>
 
 				</table>

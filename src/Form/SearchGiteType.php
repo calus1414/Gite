@@ -2,16 +2,15 @@
 
 namespace App\Form;
 
-use App\Entity\Equipement;
 use App\Entity\Gite;
+use App\Entity\Equipement;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
-class GiteType extends AbstractType
+class SearchGiteType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -24,14 +23,7 @@ class GiteType extends AbstractType
                     "placeholder" => "Nom du Gite"
                 ]
             ])
-            ->add('description', TextareaType::class, [
-                "required" => false,
-                "label" => "Description",
-                "attr" => [
 
-                    "placeholder" => "Description du Gite"
-                ]
-            ])
             ->add('surface', TextType::class, [
                 "required" => false,
                 "label" => "Surface",
@@ -42,42 +34,25 @@ class GiteType extends AbstractType
             ])
             ->add('bedroom', TextType::class, [
                 "required" => false,
-                "label" => "Nombre de Chambres",
+                "label" => "Chambres",
                 "attr" => [
 
                     "placeholder" => "1"
                 ]
             ])
-            ->add('address', TextType::class, [
-                "required" => false,
-                "label" => "Adresse",
-                "attr" => [
 
-                    "placeholder" => "Adresse du Gite"
-                ]
-            ])
             ->add('city', TextType::class, [
                 "required" => false,
                 "label" => "Ville",
-                "attr" => [
 
-                    "placeholder" => "Nom de la ville du Gite"
-                ]
             ])
-            ->add('postal_code', TextType::class, [
-                "required" => false,
-                "label" => "Code Postal",
-                "attr" => [
 
-                    "placeholder" => "Code postal du Gite"
-                ]
-            ])
             ->add('animals')
             ->add('equipements', EntityType::class, [
                 "class" => Equipement::class,
                 "choice_label" => "name",
                 "multiple" => true
-            ]);
+            ]);;
     }
 
     public function configureOptions(OptionsResolver $resolver)
