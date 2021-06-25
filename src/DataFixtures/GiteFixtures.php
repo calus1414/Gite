@@ -4,6 +4,7 @@ namespace App\DataFixtures;
 
 use Faker\Factory;
 use App\Entity\Gite;
+use App\Entity\Services;
 use App\Entity\Equipement;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
@@ -14,6 +15,26 @@ class GiteFixtures extends Fixture
     {
 
         $faker = Factory::create('fr_FR');
+        $services = [];
+
+        $se = new Services();
+        $se->setName('menage');
+
+        $se1 = new Services();
+        $se1->setName('Petit Dejeuner');
+
+        $se2 = new Services();
+        $se2->setName('Repas');
+
+
+
+        array_push($services, $se, $se1, $se2);
+
+        $manager->persist($se);
+        $manager->persist($se1);
+        $manager->persist($se2);
+
+        $manager->flush();
 
         $equipements = [];
 
@@ -54,7 +75,10 @@ class GiteFixtures extends Fixture
                 ->setAddress($faker->address())
                 ->setCity($faker->city())
                 ->addEquipement($faker->randomElement($equipements, 3))
+                ->addService($faker->randomElement($services, 3))
                 ->setPostalCode($faker->randomNumber(5, true))
+                ->setImageFile('cafer.jpg')
+                ->setUpdatedAt($faker->dateTimeThisYear())
                 ->setCreatedAt($faker->dateTimeThisYear());
             $manager->persist($gite);
 

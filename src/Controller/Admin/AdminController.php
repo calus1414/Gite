@@ -56,6 +56,9 @@ class AdminController extends AbstractController
         $gite = new Gite();
         $form =  $this->createForm(GiteType::class, $gite);
         $form->handleRequest($request);
+
+
+
         if ($form->isSubmitted() && $form->isValid()) {
             $this->em->persist($gite);
             $this->em->flush();
@@ -73,7 +76,7 @@ class AdminController extends AbstractController
      */
     public function change(Gite $gite, Request $request)
     {
-        $form = $this->createForm(UpdateGiteType::class, $gite);
+        $form = $this->createForm(GiteType::class, $gite);
 
         $form->handleRequest($request);
         // dd($gite);

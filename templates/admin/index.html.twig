@@ -7,8 +7,17 @@
 
 {% block body %}
 	<div class="container">
-		<h1>Admin Place</h1>
+		<div class="row">
+			<div class="col-8">
+				<h1>Admin Place</h1>
+			</div>
 
+
+			<div class='col-4'>
+				<a href="{{path('new_equipement')}}" class='btn btn-outline-warning'>Modifier equipement</a>
+				<a href="{{path('new_service')}}" class='btn btn-outline-warning'>Modifier Service</a>
+			</div>
+		</div>
 
 		<div class="row">
 			{% for message in app.flashes('success') %}

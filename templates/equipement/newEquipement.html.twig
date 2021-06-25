@@ -1,0 +1,50 @@
+{% extends "base.html.twig" %}
+
+
+{% block title %}modifier equipement
+{% endblock %}
+
+
+{% block body %}
+
+	<h1>Equipement</h1>
+
+
+	{% for message in app.flashes('success') %}
+		<div class='alert alert-success'>{{message}}</div>
+	{% endfor %}
+
+	<div class="row">
+		{{ form_start(form) }}
+		<div class='row'>
+			<div class='col-8'>{{ form_row(form.name) }}</div>
+
+			<div class='col-4'><input type="submit" class='btn btn-primary' value='valider'></div>
+
+
+		</div>
+
+
+		{{ form_end(form) }}
+
+
+		<table class="table table-striped">
+
+
+			{% for equipement in equipements %}
+				<tr>
+					<td>{{equipement.name}}</td>
+					<td>
+						<a href="{{path("change_equipement",{id:equipement.id})}}" class='btn btn-warning'>Modifier</a>
+					</td>
+					<td>
+						<a href="{{path("delete_equipement",{id:equipement.id})}}" class='btn btn-danger'>Suprimer</a>
+					</td>
+
+				</tr>
+			{% endfor %}
+
+		</table>
+
+	</div>
+{% endblock %}

@@ -2,13 +2,16 @@
 
 namespace App\Form;
 
-use App\Entity\Equipement;
 use App\Entity\Gite;
+use App\Entity\Services;
+use App\Entity\Equipement;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
 class GiteType extends AbstractType
@@ -32,7 +35,7 @@ class GiteType extends AbstractType
                     "placeholder" => "Description du Gite"
                 ]
             ])
-            ->add('surface', TextType::class, [
+            ->add('surface', IntegerType::class, [
                 "required" => false,
                 "label" => "Surface",
                 "attr" => [
@@ -40,7 +43,7 @@ class GiteType extends AbstractType
                     "placeholder" => "0"
                 ]
             ])
-            ->add('bedroom', TextType::class, [
+            ->add('bedroom', IntegerType::class, [
                 "required" => false,
                 "label" => "Nombre de Chambres",
                 "attr" => [
@@ -73,10 +76,23 @@ class GiteType extends AbstractType
                 ]
             ])
             ->add('animals')
+
             ->add('equipements', EntityType::class, [
                 "class" => Equipement::class,
                 "choice_label" => "name",
-                "multiple" => true
+                "multiple" => true,
+                "expanded" => true
+            ])
+            ->add('services', EntityType::class, [
+                "class" => Services::class,
+                "choice_label" => "name",
+                "multiple" => true,
+                "expanded" => true
+            ])
+            ->add('imageName', FileType::class, [
+                "required" => false,
+                "label" => "Ajouter une image"
+
             ]);
     }
 

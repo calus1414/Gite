@@ -13,6 +13,8 @@ class UpdateGiteType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+
+
         $builder
             ->add('name', TextType::class, [
                 "label" => "Nom",

@@ -11,26 +11,26 @@
 			<h1>les gites disponible</h1>
 		</div>
 
+
 		<div class="col-md-6">
 			{{ form_start(form) }}
+
 			<div class="row">
-				<div class="col-md-12 ">
-					<div class='d-flex'>
-						{{ form_row(form.name) }}<button class="btn btn-outline-success me-2" type="submit">Search</button>
-					</div>
-				</div>
+				<div class="col">{{ form_row(form.minSurface) }}</div>
+				<div class="col">{{ form_row(form.minBedroom) }}</div>
+				<div class="col">{{ form_row(form.city) }}</div>
+				<div class="col">{{ form_row(form.animals) }}</div>
+			</div>
+			<div class="row">
+				<div class="col">{{ form_row(form.equipements) }}</div>
+				<div class="col">{{ form_row(form.services) }}</div>
+			</div>
+
+
+			<div class="col"><input type="submit" class='btn btn-outline-primary' value='Rechercher'>
 
 			</div>
-			<div class="row">
-				<div class="col-md-3">{{ form_row(form.surface) }}</div>
-				<div class="col-md-3">{{ form_row(form.bedroom) }}</div>
-				<div class="col-md-3">{{ form_row(form.city) }}</div>
-				<div class="col-md-3">{{ form_row(form.animals) }}</div>
-			</div>
-			<div class="row">
-				<div class="col-md-4">{{ form_row(form.equipements) }}</div>
 
-			</div>
 			{{ form_end(form) }}
 		</div>
 
@@ -45,9 +45,23 @@
 
 
 			<div class="card m-4" style="width: 18rem;">
+
+				{% if gite.imageFile %}
+					<img src=" {{vich_uploader_asset(gite,'imageName')}} " class='card-img-top' alt="">
+
+				{% else %}
+					<img src=" /images/img/notfound.jpg " class='card-img-top' alt="">
+
+				{% endif %}
+
 				<div class="card-body">
 					<h3 class="card-title">{{gite.name}}</h3>
 					<h5 class="card-title">{{gite.createdAt | format_datetime()}}</h5>
+					<h3 class="card-title">{{gite.city}}</h3>
+					<h4 class="card-text">surface :
+						{{gite.surface}}</h4>
+					<h4 class="card-text">Chambre :
+						{{gite.bedroom}}</h4>
 					<p class="card-text">{{gite.description}}</p>
 					<p class="card-text">{{gite.postalCode}}</p>
 

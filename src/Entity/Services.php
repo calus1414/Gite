@@ -2,15 +2,15 @@
 
 namespace App\Entity;
 
-use App\Repository\EquipementRepository;
+use App\Repository\ServicesRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=EquipementRepository::class)
+ * @ORM\Entity(repositoryClass=ServicesRepository::class)
  */
-class Equipement
+class Services
 {
     /**
      * @ORM\Id
@@ -19,15 +19,13 @@ class Equipement
      */
     private $id;
 
-
     /**
-     * 
      * @ORM\Column(type="string", length=255)
      */
     private $name;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Gite::class, mappedBy="equipements")
+     * @ORM\ManyToMany(targetEntity=Gite::class, mappedBy="services")
      */
     private $gites;
 
@@ -35,10 +33,6 @@ class Equipement
     {
         $this->gites = new ArrayCollection();
     }
-
-
-
-
 
     public function getId(): ?int
     {
@@ -69,7 +63,7 @@ class Equipement
     {
         if (!$this->gites->contains($gite)) {
             $this->gites[] = $gite;
-            $gite->addEquipement($this);
+            $gite->addService($this);
         }
 
         return $this;
@@ -78,7 +72,7 @@ class Equipement
     public function removeGite(Gite $gite): self
     {
         if ($this->gites->removeElement($gite)) {
-            $gite->removeEquipement($this);
+            $gite->removeService($this);
         }
 
         return $this;

@@ -2,14 +2,21 @@
 
 namespace App\Entity;
 
-use App\Repository\GiteRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
+use App\Entity\Services;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\GiteRepository;
+use Doctrine\Common\Collections\Collection;
+use Symfony\Component\HttpFoundation\File\File;
+use Doctrine\Common\Collections\ArrayCollection;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Symfony\Component\Validator\Constraints\DateTime;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 /**
  * @ORM\Entity(repositoryClass=GiteRepository::class)
+ * 
+ * @Vich\Uploadable
  */
 class Gite
 {
@@ -108,7 +115,30 @@ class Gite
      */
     private $equipements;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=Services::class, inversedBy="gites")
+     */
+    private $services;
 
+
+    /**
+     *@var File|null
+     * @Vich\UploadableField(mapping="gite_image",fileNameProperty="imageFile")
+     */
+    private $imageName;
+
+
+    /**
+     *@var string|null
+     *@ORM\Column(type="string",length=255)
+     * 
+     */
+    private $imageFile;
+
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $updated_at;
 
 
     public function __construct()
@@ -116,6 +146,7 @@ class Gite
         $this->animals = false;
         $this->created_at = new \DateTime();
         $this->equipements = new ArrayCollection();
+        $this->services = new ArrayCollection();
     }
 
 
@@ -252,6 +283,80 @@ class Gite
     public function removeEquipement(Equipement $equipement): self
     {
         $this->equipements->removeElement($equipement);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Services[]
+     */
+    public function getServices(): Collection
+    {
+        return $this->services;
+    }
+
+    public function addService(Services $service): self
+    {
+        if (!$this->services->contains($service)) {
+            $this->services[] = $service;
+        }
+
+        return $this;
+    }
+
+    public function removeService(Services $service): self
+    {
+        $this->services->removeElement($service);
+
+        return $this;
+    }
+
+    /**
+     * Get the value of imageName
+     */
+    public function getImageName()
+    {
+        return $this->imageName;
+    }
+
+    /**
+     * Set the value of imageName
+     */
+    public function setImageName($imageName): self
+    {
+        $this->imageName = $imageName;
+        if ($this->imageName instanceof UploadedFile) {
+            $this->updated_at = new \DateTime('now');
+        }
+        return $this;
+    }
+
+    /**
+     * Get the value of imageFile
+     */
+    public function getImageFile(): ?string
+    {
+        return $this->imageFile;
+    }
+
+    /**
+     * Set the value of imageFile
+     */
+    public function setImageFile(?string $imageFile): self
+    {
+        $this->imageFile = $imageFile;
+
+        return $this;
+    }
+
+    public function getUpdatedAt(): ?\DateTimeInterface
+    {
+        return $this->updated_at;
+    }
+
+    public function setUpdatedAt(\DateTimeInterface $updated_at): self
+    {
+        $this->updated_at = $updated_at;
 
         return $this;
     }

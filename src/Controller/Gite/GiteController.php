@@ -5,9 +5,14 @@ namespace App\Controller\Gite;
 
 use App\Entity\Gite;
 use App\Form\GiteType;
-use App\Form\SearchGiteType;
+
+use App\Entity\Contact;
+use App\Form\ContactType;
+use App\Entity\PropertySearch;
+use App\Form\PropertySearchType;
 use App\Repository\GiteRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use App\Notification\ContactNotification;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -53,15 +58,15 @@ class GiteController extends AbstractController
 
     public function gites(Request $request)
     {
-        $exemple = new Gite();
-        $form = $this->createForm(SearchGiteType::class, $exemple);
-        if ($form->isSubmitted() && $form->isValid()) {
-            $gite = $this->repo->findBy(
-                wze
-            );
-        } else {
-            $gite = $this->repo->findAll();
-        }
+
+        $search = new PropertySearch();
+        $form = $this->createForm(PropertySearchType::class, $search);
+
+
+        $form->handleRequest($request);
+
+        $gite = $this->repo->findForNavBar($search);
+
         $gite = $this->paginator->paginate(
             $gite,
             $request->query->getInt("page", 1),
@@ -71,9 +76,11 @@ class GiteController extends AbstractController
 
 
 
+
         return $this->render('gite/index.html.twig', [
             "gites" => $gite,
             "form" => $form->createView()
+
         ]);
     }
 
@@ -82,10 +89,29 @@ class GiteController extends AbstractController
      * @Route("/gite/{id}", name="gite_show")
      * 
      */
-    public function show(Gite $gite)
+    public function show(Gite $gite, Request $request, ContactNotification $notification)
     {
+
+
+        $contact = new Contact();
+        $contact->setGite($gite);
+        $form = $this->createForm(ContactType::class, $contact);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $notification->notify($contact);
+            $this->addFlash('success', "votre email a bien était envoyé");
+
+            return $this->redirectToRoute(
+                'gite_show',
+                ["id" => $gite->getId()]
+            );
+        }
         // dd($gite);
 
-        return $this->render('gite/show.html.twig', ["gite" => $gite]);
+        return $this->render('gite/show.html.twig', [
+            "gite" => $gite,
+            'form' => $form->createView()
+        ]);
     }
 }
