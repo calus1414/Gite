@@ -22,13 +22,13 @@ class ContactNotification
     public function notify(Contact $contact)
     {
 
-        // dd($contact);
-        $email = (new Email())
-            ->from($contact->getEmail())
-            ->to('truellucastest@gmail.com')
-            ->subject('Demande de contact')
-            ->text("Je suis {$contact->getFirstname()} et j'aimerais avoir des renseignement sur le Gite {$contact->getGite()->getName()}");
+        dd($contact);
+        // $email = (new Email())
+        //     ->from($contact->getEmail())
+        //     ->to('truellucastest@gmail.com')
+        //     ->subject('Demande de contact')
+        //     ->text("Je suis {$contact->getFirstname()} et j'aimerais avoir des renseignement sur le Gite {$contact->getGite()->getName()}");
 
-        $this->mailer->send($email);
+        // $this->mailer->send($email);
     }
 }

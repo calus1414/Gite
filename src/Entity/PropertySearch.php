@@ -10,12 +10,12 @@ use Doctrine\Common\Collections\ArrayCollection;
 class PropertySearch
 {
 
-    private   $minSurface = 0;
-    private   $minBedroom = 0;
+    private int   $minSurface = 0;
+    private  int $minBedroom = 0;
     private   $animals = null;
-    private   $equipements;
-    private   $services;
-    private   $city = "";
+    private  ArrayCollection $equipements;
+    private  ArrayCollection $services;
+    private  string $city = "";
 
 
 
@@ -31,7 +31,7 @@ class PropertySearch
     /**
      * Get the value of minSurface
      */
-    public function getMinSurface()
+    public function getMinSurface(): int
     {
         return $this->minSurface;
     }
@@ -39,7 +39,7 @@ class PropertySearch
     /**
      * Set the value of minSurface
      */
-    public function setMinSurface($minSurface): self
+    public function setMinSurface(int $minSurface): self
     {
         $this->minSurface = $minSurface;
 
@@ -49,7 +49,7 @@ class PropertySearch
     /**
      * Get the value of minBedroom
      */
-    public function getMinBedroom()
+    public function getMinBedroom(): int
     {
         return $this->minBedroom;
     }
@@ -57,7 +57,7 @@ class PropertySearch
     /**
      * Set the value of minBedroom
      */
-    public function setMinBedroom($minBedroom): self
+    public function setMinBedroom(int $minBedroom): self
     {
         $this->minBedroom = $minBedroom;
 
@@ -77,7 +77,7 @@ class PropertySearch
      *
      * @return  self
      */
-    public function setAnimals($animals)
+    public function setAnimals($animals): self
     {
         $this->animals = $animals;
 
@@ -87,7 +87,7 @@ class PropertySearch
     /**
      * Get the value of city
      */
-    public function getCity()
+    public function getCity(): string
     {
         return $this->city;
     }
@@ -95,7 +95,7 @@ class PropertySearch
     /**
      * Set the value of city
      */
-    public function setCity($city): self
+    public function setCity(string $city): self
     {
         $this->city = $city;
 
@@ -108,7 +108,7 @@ class PropertySearch
     /**
      * Get the value of equipements
      */
-    public function getEquipements()
+    public function getEquipements(): ArrayCollection
     {
         return $this->equipements;
     }
@@ -118,7 +118,7 @@ class PropertySearch
      *
      * @return  self
      */
-    public function setEquipements($equipements)
+    public function setEquipements(ArrayCollection $equipements): self
     {
         $this->equipements = $equipements;
 
@@ -128,7 +128,7 @@ class PropertySearch
     /**
      * Get the value of services
      */
-    public function getServices()
+    public function getServices(): ArrayCollection
     {
         return $this->services;
     }
@@ -138,7 +138,7 @@ class PropertySearch
      *
      * @return  self
      */
-    public function setServices($services)
+    public function setServices(ArrayCollection $services): self
     {
         $this->services = $services;
 

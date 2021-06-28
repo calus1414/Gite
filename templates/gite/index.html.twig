@@ -10,20 +10,32 @@
 		<div class="col-md-6">
 			<h1>les gites disponible</h1>
 		</div>
-
-
 		<div class="col-md-6">
-			{{ form_start(form) }}
+			<input type="button" id='btn-search' class="btn btn-primary" value='Trouver un gite'>
+		</div>
 
+		<div class="col-md-12 d-none" id='form-search'>
+			{{ form_start(form) }}
 			<div class="row">
-				<div class="col">{{ form_row(form.minSurface) }}</div>
-				<div class="col">{{ form_row(form.minBedroom) }}</div>
-				<div class="col">{{ form_row(form.city) }}</div>
-				<div class="col">{{ form_row(form.animals) }}</div>
-			</div>
-			<div class="row">
-				<div class="col">{{ form_row(form.equipements) }}</div>
-				<div class="col">{{ form_row(form.services) }}</div>
+				<div class="col-6">
+					<div class="row">
+						<div class="col-12">{{ form_row(form.city) }}</div>
+						<div class="col-4">{{ form_row(form.minSurface) }}</div>
+						<div class="col-4">{{ form_row(form.minBedroom) }}</div>
+
+						<div class="col-4">{{ form_row(form.animals) }}</div>
+
+
+					</div>
+				</div>
+				<div class="col-6">
+					<div class="row">
+
+
+						<div class="col-6">{{ form_row(form.equipements) }}</div>
+						<div class="col-6">{{ form_row(form.services) }}</div>
+					</div>
+				</div>
 			</div>
 
 

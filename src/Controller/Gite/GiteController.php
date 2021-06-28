@@ -15,6 +15,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use App\Notification\ContactNotification;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
@@ -38,7 +39,7 @@ class GiteController extends AbstractController
      * 
      */
 
-    public function index()
+    public function index(): Response
     {
 
 
@@ -56,7 +57,7 @@ class GiteController extends AbstractController
      * 
      */
 
-    public function gites(Request $request)
+    public function gites(Request $request): Response
     {
 
         $search = new PropertySearch();
@@ -89,7 +90,7 @@ class GiteController extends AbstractController
      * @Route("/gite/{id}", name="gite_show")
      * 
      */
-    public function show(Gite $gite, Request $request, ContactNotification $notification)
+    public function show(Gite $gite, Request $request, ContactNotification $notification): Response
     {
 
 

@@ -17,19 +17,19 @@ class Equipement
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    private $id;
+    private int $id;
 
 
     /**
      * 
      * @ORM\Column(type="string", length=255)
      */
-    private $name;
+    private string $name;
 
     /**
      * @ORM\ManyToMany(targetEntity=Gite::class, mappedBy="equipements")
      */
-    private $gites;
+    private  $gites;
 
     public function __construct()
     {

@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use DateTimeInterface;
 use App\Entity\Services;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\GiteRepository;
@@ -25,7 +26,7 @@ class Gite
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    private $id;
+    private int $id;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -38,7 +39,7 @@ class Gite
      *      maxMessage = "le nom du Gite doit comporter un maximum de   {{ limit }} caracteres"
      * )
      */
-    private $name;
+    private string $name;
 
     /**
      * @ORM\Column(type="text")
@@ -53,7 +54,7 @@ class Gite
      * 
      * 
      */
-    private $description;
+    private string $description;
 
     /**
      * @ORM\Column(type="integer")
@@ -61,7 +62,7 @@ class Gite
      *      message= "la surface du gite ne peut être vide")
      * 
      */
-    private $surface;
+    private int $surface;
 
     /**
      * @ORM\Column(type="integer")
@@ -69,7 +70,7 @@ class Gite
      *      message= "le nombre de chambre du gite ne peut être vide")
      * 
      */
-    private $bedroom;
+    private int $bedroom;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -77,7 +78,7 @@ class Gite
      *      message= "l'adresse du gite ne peut être vide")
      * 
      */
-    private $address;
+    private string $address;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -85,7 +86,7 @@ class Gite
      *      message= "la ville du gite ne peut être vide")
      * 
      */
-    private $city;
+    private string $city;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -96,19 +97,19 @@ class Gite
      *      message="le code postal doit contenir 5 chiffres"
      * )
      */
-    private $postal_code;
+    private string $postal_code;
 
     /**
      * @ORM\Column(type="boolean", options={"default":false})
      * 
      * 
      */
-    private $animals;
+    private bool $animals;
 
     /**
      * @ORM\Column(type="datetime")
      */
-    private $created_at;
+    private DateTimeInterface $created_at;
 
     /**
      * @ORM\ManyToMany(targetEntity=Equipement::class, inversedBy="gites")
@@ -118,14 +119,14 @@ class Gite
     /**
      * @ORM\ManyToMany(targetEntity=Services::class, inversedBy="gites")
      */
-    private $services;
+    private  $services;
 
 
     /**
      *@var File|null
      * @Vich\UploadableField(mapping="gite_image",fileNameProperty="imageFile")
      */
-    private $imageName;
+    private ?File $imageName;
 
 
     /**
@@ -133,12 +134,12 @@ class Gite
      *@ORM\Column(type="string",length=255)
      * 
      */
-    private $imageFile;
+    private ?string $imageFile;
 
     /**
      * @ORM\Column(type="datetime")
      */
-    private $updated_at;
+    private DateTimeInterface $updated_at;
 
 
     public function __construct()
@@ -314,7 +315,7 @@ class Gite
     /**
      * Get the value of imageName
      */
-    public function getImageName()
+    public function getImageName(): ?File
     {
         return $this->imageName;
     }
@@ -322,7 +323,7 @@ class Gite
     /**
      * Set the value of imageName
      */
-    public function setImageName($imageName): self
+    public function setImageName(File $imageName): self
     {
         $this->imageName = $imageName;
         if ($this->imageName instanceof UploadedFile) {

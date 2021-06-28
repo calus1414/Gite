@@ -8,7 +8,9 @@ use App\Form\ServiceType;
 use App\Repository\ServicesRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class ServiceController extends AbstractController
@@ -26,7 +28,7 @@ class ServiceController extends AbstractController
      * @Route("/service", name="new_service")
      * 
      */
-    public function new(Request $request)
+    public function new(Request $request): Response
     {
         $allService = $this->serviceRepo->findAll();
         $services = new Services();
@@ -49,9 +51,9 @@ class ServiceController extends AbstractController
      * @Route("/service/{id}", name="change_service")
      * 
      */
-    public function change(Request $request, Services $service)
+    public function change(Request $request, Services $service): Response
     {
-        $allService = $this->serviceRepo->findAll();
+
 
 
         $form = $this->createForm(ServiceType::class, $service);
@@ -64,7 +66,7 @@ class ServiceController extends AbstractController
             return $this->redirectToRoute('new_service');
         }
         return $this->render('service/changeService.html.twig', [
-            'services' => $allService,
+
             'form' => $form->createView()
 
         ]);
@@ -73,7 +75,7 @@ class ServiceController extends AbstractController
      * @Route("/service/d/{id}", name="delete_service")
      * 
      */
-    public function delete(Request $request, Services $service)
+    public function delete(Request $request, Services $service): RedirectResponse
     {
         $this->em->remove($service);
         $this->em->flush();

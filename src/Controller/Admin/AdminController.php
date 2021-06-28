@@ -5,11 +5,14 @@ namespace App\Controller\Admin;
 use App\Entity\Gite;
 use App\Form\GiteType;
 use App\Form\UpdateGiteType;
+use Doctrine\DBAL\Schema\View;
 use App\Repository\GiteRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class AdminController extends AbstractController
@@ -31,7 +34,7 @@ class AdminController extends AbstractController
      * 
      * 
      */
-    public function index(Request $request)
+    public function index(Request $request): Response
     {
 
 
@@ -50,7 +53,7 @@ class AdminController extends AbstractController
     /**
      * @Route("/admin/new", name="admin_new")
      */
-    public function new(Request $request)
+    public function new(Request $request): Response
     {
 
         $gite = new Gite();
@@ -74,7 +77,7 @@ class AdminController extends AbstractController
      * @Route("/admin/{id}", name="admin_change")
      * 
      */
-    public function change(Gite $gite, Request $request)
+    public function change(Gite $gite, Request $request): Response
     {
         $form = $this->createForm(GiteType::class, $gite);
 
@@ -99,7 +102,7 @@ class AdminController extends AbstractController
      * 
      */
 
-    public function delete(Gite $gite)
+    public function delete(Gite $gite): RedirectResponse
     {
         // $gite = $this->giteRipository->find($id);
 

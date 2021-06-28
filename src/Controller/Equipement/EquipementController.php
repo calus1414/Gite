@@ -9,7 +9,9 @@ use App\Repository\EquipementRepository;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class EquipementController extends AbstractController
@@ -34,7 +36,7 @@ class EquipementController extends AbstractController
      * 
      */
 
-    public function new(Request $request)
+    public function new(Request $request): Response
     {
         $equipement = $this->equiRepo->findAll();
         $equipeForm = new Equipement();
@@ -61,7 +63,8 @@ class EquipementController extends AbstractController
      * 
      */
 
-    public function change(Request $request,   Equipement $equipement)
+
+    public function change(Request $request,   Equipement $equipement): Response
     {
 
 
@@ -75,8 +78,7 @@ class EquipementController extends AbstractController
             $this->addFlash('success', "l'equipement a bien été enregistrer");
             return $this->redirectToRoute('new_equipement');
         }
-        return $this->render("equipement/newEquipement.html.twig", [
-
+        return $this->render("equipement/changeEquipement.html.twig", [
 
             'form' => $form->createView()
         ]);
@@ -86,7 +88,7 @@ class EquipementController extends AbstractController
      * @Route("/equipement/d/{id}", name="delete_equipement")
      * 
      */
-    public function delete(Equipement $equipement)
+    public function delete(Equipement $equipement): RedirectResponse
     {
 
         $this->em->remove($equipement);

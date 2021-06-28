@@ -78,7 +78,7 @@ class Contact
     /**
      * Get the value of message
      */
-    public function getMessage()
+    public function getMessage(): string
     {
         return $this->message;
     }
@@ -88,7 +88,7 @@ class Contact
      *
      * @return  self
      */
-    public function setMessage($message)
+    public function setMessage(string $message): self
     {
         $this->message = $message;
 
@@ -122,7 +122,7 @@ class Contact
     /**
      * Get the value of firstname
      */
-    public function getFirstname()
+    public function getFirstname(): string
     {
         return $this->firstname;
     }
@@ -132,7 +132,7 @@ class Contact
      *
      * @return  self
      */
-    public function setFirstname($firstname)
+    public function setFirstname(string $firstname): self
     {
         $this->firstname = $firstname;
 
@@ -142,7 +142,7 @@ class Contact
     /**
      * Get the value of LastName
      */
-    public function getLastName()
+    public function getLastName(): string
     {
         return $this->LastName;
     }
@@ -152,7 +152,7 @@ class Contact
      *
      * @return  self
      */
-    public function setLastName($LastName)
+    public function setLastName(string $LastName): self
     {
         $this->LastName = $LastName;
 
@@ -162,7 +162,7 @@ class Contact
     /**
      * Get the value of phone
      */
-    public function getPhone()
+    public function getPhone(): string
     {
         return $this->phone;
     }
@@ -172,7 +172,7 @@ class Contact
      *
      * @return  self
      */
-    public function setPhone($phone)
+    public function setPhone(string $phone): self
     {
         $this->phone = $phone;
 
