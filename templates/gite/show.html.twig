@@ -8,11 +8,20 @@
 {% block body %}
 	<h1>Le Gite :
 	</h1>
+	<div class="row">
+		<div class="col-md-4"><input type="button" class='btn btn-primary' id='btn-contact' value='Contacter'></div>
+	</div>
+	<div class="row d-none" id='form-contact'>
+		{{ form_start(form) }}
+		{{ form_widget(form) }}
+		<input type="submit" class='btn btn-outline-primary ' value='Envoyer'>
+		{{ form_end(form) }}
 
-
+	</div>
 	<div class="row">
 		<h1 class="card-title">{{gite.name}}</h1>
 		<div class="row">
+			<img src="{{vich_uploader_asset(gite,'imageName')}}" class='card-img-top' alt="">
 			<p class="">{{gite.description}}</p>
 			<div class="col-md-6">
 				<table class="table table-striped">
@@ -34,6 +43,26 @@
 								<td>Refuser</td>
 								{% endif%}
 							</tr>
+						</tr>
+						<tr>
+							<th>Equipement</th>
+							<td>
+								{% for equipement in gite.equipements %}
+
+									<li>{{equipement.name}}</li>
+
+								{% endfor %}
+							</td>
+						</tr>
+						<tr>
+							<th>Service</th>
+							<td>
+								{% for service in gite.services %}
+
+									<li>{{service.name}}</li>
+
+								{% endfor %}
+							</td>
 						</tr>
 					</thead>
 
