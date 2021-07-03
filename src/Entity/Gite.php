@@ -126,7 +126,8 @@ class Gite
      *@var File|null
      * @Vich\UploadableField(mapping="gite_image",fileNameProperty="imageFile")
      */
-    private ?File $imageName;
+    private  $imageName;
+
 
 
     /**
@@ -140,6 +141,16 @@ class Gite
      * @ORM\Column(type="datetime")
      */
     private DateTimeInterface $updated_at;
+
+    /**
+     * @ORM\Column(type="float", scale=4, precision=6)
+     */
+    private $lat;
+
+    /**
+     * @ORM\Column(type="float", scale=4, precision=7)
+     */
+    private $lng;
 
 
     public function __construct()
@@ -358,6 +369,44 @@ class Gite
     public function setUpdatedAt(\DateTimeInterface $updated_at): self
     {
         $this->updated_at = $updated_at;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of lat
+     */
+    public function getLat()
+    {
+        return $this->lat;
+    }
+
+    /**
+     * Set the value of lat
+     *
+     * @return  self
+     */
+    public function setLat($lat)
+    {
+        $this->lat = $lat;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of lng
+     */
+    public function getLng()
+    {
+        return $this->lng;
+    }
+
+    /**
+     * Set the value of lng
+     */
+    public function setLng($lng): self
+    {
+        $this->lng = $lng;
 
         return $this;
     }

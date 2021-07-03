@@ -16,6 +16,8 @@
         "build": "encore production --progress"
     },
     "dependencies": {
-        "nodemailer": "^6.6.2"
+        "leaflet": "^1.7.1",
+        "nodemailer": "^6.6.2",
+        "places.js": "^1.19.0"
     }
 }

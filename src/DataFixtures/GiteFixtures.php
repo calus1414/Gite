@@ -77,7 +77,7 @@ class GiteFixtures extends Fixture
                 ->addEquipement($faker->randomElement($equipements, 3))
                 ->addService($faker->randomElement($services, 3))
                 ->setPostalCode($faker->randomNumber(5, true))
-                ->setImageFile('cafer.jpg')
+                ->setImageFile('notfound.jpg')
                 ->setUpdatedAt($faker->dateTimeThisYear())
                 ->setCreatedAt($faker->dateTimeThisYear());
             $manager->persist($gite);
