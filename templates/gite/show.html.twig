@@ -6,71 +6,103 @@
 {% endblock  %}
 
 {% block body %}
-	<h1>Le Gite :
-	</h1>
-	<div class="row">
-		<div class="col-md-4"><input type="button" class='btn btn-primary' id='btn-contact' value='Contacter'></div>
-	</div>
-	<div class="row d-none" id='form-contact'>
-		{{ form_start(form) }}
-		{{ form_widget(form) }}
-		<input type="submit" class='btn btn-outline-primary ' value='Envoyer'>
-		{{ form_end(form) }}
 
-	</div>
-	<div class="row">
-		<h1 class="card-title">{{gite.name}}</h1>
-		<div class="row">
-			<img src="{{vich_uploader_asset(gite,'imageName')}}" class='card-img-top' alt="">
-			<p class="">{{gite.description}}</p>
-			<div class="col-md-6">
-				<table class="table table-striped">
-					<thead>
-						<tr>
-							<th>Surface</th>
-							<td>{{gite.surface}}</td>
-						</tr>
-						<tr>
-							<th>Chambre</th>
-							<td>{{gite.bedroom}}</td>
-						</tr>
-						<tr>
-							<th>Animaux</th>
-							{% if gite.animals %}
 
-								<td>Accepter</td>
-							{% else %}
-								<td>Refuser</td>
-								{% endif%}
-							</tr>
-						</tr>
-						<tr>
-							<th>Equipement</th>
-							<td>
-								{% for equipement in gite.equipements %}
+</div>
 
-									<li>{{equipement.name}}</li>
 
-								{% endfor %}
-							</td>
-						</tr>
-						<tr>
-							<th>Service</th>
-							<td>
-								{% for service in gite.services %}
-
-									<li>{{service.name}}</li>
-
-								{% endfor %}
-							</td>
-						</tr>
-					</thead>
-
-				</table>
-			</div>
-
+<div class="row m-5">
+	<div id='aside-left' class="col-md-5 m-2">
+		<div class="col-12">
+			<img class='img-gite-show mb-3' src="{{vich_uploader_asset(gite,'imageName')}}" style="width:100%; max-width:420px; height:300px; border-radius:25px;" alt=" ">
 
 		</div>
 
+
+		<div class='col-12'>
+			<div id='map' style="width:100%; max-width:420px; height:300px;" data-lat="{{gite.lat}}" data-lng="{{gite.lng}}"></div>
+
+		</div>
 	</div>
+	<div id='aside-center' class="card mb-3 m-2 col-md-6" style="max-width: 390px;">
+
+		<div class="card-body">
+			<h1 class="card-title">
+				<strong>{{gite.name}}</strong>
+			</h1>
+			<label for="">Description :</label>
+			<p class="mt-1 m-4">{{gite.description}}</p>
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th>Surface</th>
+						<td>{{gite.surface}}</td>
+					</tr>
+					<tr>
+						<th>Chambre</th>
+						<td>{{gite.bedroom}}</td>
+					</tr>
+					<tr>
+						<th>Animaux</th>
+						{% if gite.animals %}
+
+							<td>Accepter</td>
+						{% else %}
+							<td>Refuser</td>
+							{% endif%}
+						</tr>
+					</tr>
+					<tr>
+						<th>Equipement</th>
+						<td>
+							{% for equipement in gite.equipements %}
+
+								<li>{{equipement.name}}</li>
+
+							{% endfor %}
+						</td>
+					</tr>
+					<tr>
+						<th>Service</th>
+						<td>
+							{% for service in gite.services %}
+
+								<li>{{service.name}}</li>
+
+							{% endfor %}
+						</td>
+					</tr>
+				</thead>
+
+			</table>
+		</div>
+	</div>
+	<div id='aside-right' class="col-md-1 m-2">
+		<div class="row">
+			<div class="col-md-4"><input type="button" class='btn btn-primary' id='btn-contact' value='Contacter'></div>
+		</div>
+		<div class="row d-none" id='form-contact'>
+			{{ form_start(form) }}
+
+			<div class="row">
+				<div class="col-6">{{ form_row(form.firstname) }}</div>
+				<div class="col-6">{{ form_row(form.LastName) }}</div>
+			</div>
+			<div class="row">
+				<div class="col-6">{{ form_row(form.email) }}</div>
+				<div class="col-6">{{ form_row(form.phone) }}</div>
+
+			</div>
+			<div class="row">
+
+				<div class="col-8">{{ form_row(form.message) }}</div>
+
+			</div>
+
+			<input type="submit" class='btn btn-outline-primary ' value='Envoyer'>
+			{{ form_end(form) }}
+
+		</div>
+	</div>
+
 </div>{% endblock  %}

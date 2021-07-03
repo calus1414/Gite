@@ -6,10 +6,8 @@
 
 {% block body %}
 
-	<div class="row">
-		<div class="col-md-6">
-			<h1>les gites disponible</h1>
-		</div>
+	<div class="row m-2">
+
 		<div class="col-md-6">
 			<input type="button" id='btn-search' class="btn btn-primary" value='Trouver un gite'>
 		</div>
@@ -56,29 +54,36 @@
 		{% for gite in gites %}
 
 
-			<div class="card m-4" style="width: 18rem;">
+			<div class="card m-4 border-light " style="width: 18rem;">
 
 				{% if gite.imageFile %}
-					<img src=" {{vich_uploader_asset(gite,'imageName')}} " class='card-img-top' alt="">
+					<img src=" {{vich_uploader_asset(gite,'imageName' )}} " class='card-img-top mt-2' style="width:260px; height:170px;" alt="">
 
 				{% else %}
-					<img src=" /images/img/notfound.jpg " class='card-img-top' alt="">
+					<img src=" /images/img/notfound.jpg " class='card-img-top mt-2' style="width:260px; height:170px;" alt="">
 
 				{% endif %}
 
 				<div class="card-body">
-					<h3 class="card-title">{{gite.name}}</h3>
-					<h5 class="card-title">{{gite.createdAt | format_datetime()}}</h5>
-					<h3 class="card-title">{{gite.city}}</h3>
-					<h4 class="card-text">surface :
-						{{gite.surface}}</h4>
-					<h4 class="card-text">Chambre :
-						{{gite.bedroom}}</h4>
-					<p class="card-text">{{gite.description}}</p>
-					<p class="card-text">{{gite.postalCode}}</p>
+					<h3 class="card-title">
+						<strong>{{gite.name}}</strong>
+					</h3>
+
+					<p class="card-title">
+						<strong>ville :</strong>
+						{{gite.city}}</p>
+					<p class="card-text">
+						<strong>Surface :</strong>
+						{{gite.surface}}
+						m²</p>
+					<p class="card-text">
+						<strong>nombre de Chambre :</strong>
+						{{gite.bedroom}}</p>
 
 				</div>
-				<a class='btn btn-primary' href='{{ path("gite_show",{id:gite.id}) }}'>Voir le gite</a>
+				<a class='btn btn-light btn-gite mb-2' href='{{ path("gite_show",{id:gite.id}) }}'>
+					<strong>Voir le gite</strong>
+				</a>
 
 			</div>
 

@@ -1,3 +1,38 @@
-body {
-    background-color: lightgray;
+.card {
+    background-color: rgb(243, 243, 243);
+    box-shadow: 12px 12px 2px 1px rgba(0, 0, 255, .2);
+}
+
+.img-gite-show {
+    box-shadow: 12px 12px 2px 1px rgba(0, 0, 255, .2);
+
+}
+
+.btn-gite {
+
+    border: 1px solid rgb(192, 190, 190);
+    color: rgb(160, 158, 158);
+    ;
+}
+
+.btn-gite:hover {
+    color: white;
+    ;
+    background-color: rgb(192, 190, 190);
+    ;
+}
+
+a {
+    text-decoration: none;
+}
+
+.link {
+    margin-left: 10px;
+    color: rgba(0, 0, 0, .55);
+    ;
+}
+
+.link:hover {
+    color: black;
+    font-weight: bold;
 }
